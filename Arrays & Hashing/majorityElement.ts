@@ -10,5 +10,47 @@ function majorityElement(nums: number[]): any {
   }
 }
 
-console.log(majorityElement([3,2,3])) // 3
-console.log(majorityElement([2,2,1,1,1,2,2])) // 2
+// Яндекс залупа
+
+//@ts-ignore
+Array.prototype.groupBy = function (fn) {
+  return this.reduce((acc, item) => {
+    const key = fn(item)
+    acc[key] = acc[key] || []
+    acc[key].push(item) 
+    return acc
+  }, {})
+}
+
+const asyncAuth = (p0: (error: any, data: any) => void) => {
+}
+
+function auth() {
+  return new Promise((resolve, reject) => {
+    asyncAuth((error, data) => {
+      if (error) {
+        reject(error)
+      } else {
+        resolve(data)
+      }
+    })
+  })
+}
+
+function tryAuth(n) {
+  return new Promise((resolve, reject) => {
+    const attemp = (remainingAttemps) => {
+      auth()
+      .then(resolve)
+      .catch((error) => {
+        if (remainingAttemps > 1) {
+          attemp(remainingAttemps - 1)
+        } else {
+          reject(error)
+        }
+      })
+    }
+
+    attemp(n);
+  })
+}
