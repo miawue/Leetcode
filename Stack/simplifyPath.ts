@@ -24,3 +24,4 @@ console.log(simplifyPath("/home//foo/")) // "/home/foo"
 console.log(simplifyPath("/a/./b/../../c/")) // "/c"
 console.log(simplifyPath("/a/../../b/../c//.//")) // "/c"
 console.log(simplifyPath("/a//b////c/d//././/..")) // "/a/b/c"
+ 
